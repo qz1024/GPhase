@@ -169,7 +169,7 @@ The final assembly result file is located in the scaffold_hap folder and mainly 
 
 # Generate a Hi-C heatmap
 
-GPhase provides two workflows for generating Hi-C heatmaps and preparing assemblies for manual curation in Juicebox.
+GPhase provides two workflows for generating Hi-C heatmaps and preparing assemblies for manual correction in Juicebox.
 
 ### 1. Method1: Generate using the original unitig-level FASTA
 
@@ -257,7 +257,7 @@ ctg00000001.1    1      42223   1       W       ctg000001l      1       42223   
 
 ## Export corrected assembly
 
-After manual curation in Juicebox, export the corrected assembly with `juicer post`. This applies `final_hic.review.assembly` onto the reference FASTA using `final_hic.liftover.agp` as the coordinate map. Use the same reference FASTA that was supplied to `juicebox.sh`:
+After manual correction in Juicebox, export the corrected assembly with `juicer post`. This applies `final_hic.review.assembly` onto the reference FASTA using `final_hic.liftover.agp` as the coordinate map. Use the same reference FASTA that was supplied to `juicebox.sh`:
 
 **Method 1 (unitig-level):**
 
@@ -287,12 +287,9 @@ After manual curation in Juicebox, export the corrected assembly with `juicer po
 
 
 # Tips
-
 1. The `cluster_q` and `scaffold_q` parameters are only enabled when the input mapping file format is BAM. If using pairs, the `mapQ` parameter of the mapping software (e.g., Chromap) can be adjusted, but it is not recommended to set `mapQ` to 0, as this will affect the accuracy of the phasing due to multiple-mapping.
 2. When assembling `polyploids`, it is recommended to use `unitig-level` assembly `sequences` and `graph` for phasing assembly. Generally, unitig results in fewer errors compared to contig. Furthermore, using unitig allows for the utilization of more assembly graph information, leading to better assembly results.
 3. GPhase can largely solve the problem of sequence collapse during assembly, but it cannot solve the problem of `large fragments collapsing` in haplotypes.
-
-
 
 # Test dataset
 
