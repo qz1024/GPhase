@@ -223,18 +223,18 @@ The commands above produce the following files for Hi-C heatmap generation, Juic
 
 `rename_collapse_agp_pairs_fasta.py` *(Method 1 only)*
 
-- `rename.fa` — FASTA with original unitig names (e.g. `utg000404l`). Duplicated collapsed unitigs are suffixed with `_dup1`, `_dup2`, etc.
-- `rename.agp` — AGP consistent with `rename.fa`.
+- `rename.fa` : FASTA with original unitig names (e.g. `utg000404l`). Duplicated collapsed unitigs are suffixed with `_dup1`, `_dup2`, etc.
+- `rename.agp` : AGP consistent with `rename.fa`.
 
 `chromap` *(both methods)*
 
-- `remap.chromap.pairs` — Hi-C pairs remapped to the reference.
+- `remap.chromap.pairs` : Hi-C pairs remapped to the reference.
 
 `juicebox.sh`
 
-- `final_hic.hic` — Hi-C contact map for **[Juicebox](https://github.com/aidenlab/Juicebox)**.
-- `final_hic.assembly` — Juicebox assembly file with sequential ctg-style IDs (e.g. `ctg00000001.1`).
-- `final_hic.liftover.agp` — Maps each Juicebox ctg ID (column 1) to the underlying reference sequence (column 6) and coordinates (columns 7–8).
+- `final_hic.hic` : Hi-C contact map for **[Juicebox](https://github.com/aidenlab/Juicebox)**.
+- `final_hic.assembly` : Juicebox assembly file with sequential ctg-style IDs (e.g. `ctg00000001.1`).
+- `final_hic.liftover.agp` : Maps each Juicebox ctg ID (column 1) to the underlying reference sequence (column 6) and coordinates (columns 7–8).
 
 > **Important:** Juicebox uses `ctg********.1`-style names (`.assembly` / `.hic`), while the reference FASTA uses `utg******l` (Method 1) or `ctg******l` (Method 2) names. `final_hic.liftover.agp` records the correspondence between these two naming systems.
 
