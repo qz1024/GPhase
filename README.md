@@ -171,7 +171,7 @@ The final assembly result file is located in the scaffold_hap folder and mainly 
 
 GPhase provides two workflows for generating Hi-C heatmaps and preparing assemblies for manual curation in Juicebox.
 
-**### 1. Generate using the original unitig-level FASTA**
+### 1. Method1: Generate using the original unitig-level FASTA
 
 Because collapsed sequences appear multiple times in the assembly, duplicated unitigs must be distinguished in the AGP, FASTA, and Hi-C mapping files before heatmap generation. This workflow first assigns a fixed suffix to duplicated collapsed unitigs (in both AGP and FASTA), remaps Hi-C reads with `mapQ:0` (retaining multi-mappings), and then generates a Hi-C heatmap with Juicer.
 
@@ -196,9 +196,9 @@ bash /Path/to/GPhase/scaffold_hap/juicebox.sh \
 -o final_hic -g /Path/to/GPhase
 ```
 
+### 2. Method2: Generate using GPhase contig-level assembly (`gphase_final_contig.fasta`)
 
-
-### 2. Generate using GPhase contig-level assembly (`gphase_final_contig.fasta`)
+This workflow uses the contig-level assembly produced by GPhase `gphase_final_contig.fasta` and `gphase_final_contig.agp` in the `scaffold_hap` folder). Because GPhase has already resolved collapsed sequences into separate contigs, no additional renaming step is required. Simply remap Hi-C reads to the contig-level reference and generate the heatmap with `juicebox.sh`. 
 
 ```
 # Remap Hi-C reads
@@ -232,14 +232,13 @@ The commands above produce the following files for Hi-C heatmap generation, Juic
 
 `juicebox.sh`
 
-- `final_hic.hic` — Hi-C contact map for **[Juicebox Assembly Tools (JBAT)](https://github.com/aidenlab/Juicebox)**.
+- `final_hic.hic` — Hi-C contact map for **[Juicebox](https://github.com/aidenlab/Juicebox)**.
 - `final_hic.assembly` — Juicebox assembly file with sequential ctg-style IDs (e.g. `ctg00000001.1`).
 - `final_hic.liftover.agp` — Maps each Juicebox ctg ID (column 1) to the underlying reference sequence (column 6) and coordinates (columns 7–8).
 
 > **Important:** Juicebox uses `ctg********.1`-style names (`.assembly` / `.hic`), while the reference FASTA uses `utg******l` (Method 1) or `ctg******l` (Method 2) names. `final_hic.liftover.agp` records the correspondence between these two naming systems.
->
-> Example lines from `final_hic.liftover.agp`:
 
+Example lines from final_hic.liftover.agp:
 ```
 # Method 1 (unitig-level rename.fa):
 ctg00000007.1   1       37974   1       W       utg007901l_dup1 1       37974   +
