@@ -140,8 +140,8 @@ LOG_INFO ${log_file} "run" "Creat directory: bam_files"
 mkdir -p bam_files
 bam_abs=$(realpath "${output_prefix}.bam")
 bai_abs=$(realpath "${output_prefix}.bam.bai")
-ln -sf "${bam_abs}" bam_files/
-ln -sf "${bai_abs}" bam_files/
+ln -sf "${bam_abs}" "bam_files/$(basename "${bam_abs}")"
+ln -sf "${bai_abs}" "bam_files/$(basename "${bai_abs}")"
 
 # gene.list
 LOG_INFO ${log_file} "run" "Creat gene.list"
