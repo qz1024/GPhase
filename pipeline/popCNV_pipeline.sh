@@ -136,11 +136,14 @@ LOG_INFO ${log_file} "run" "samtools index -@ ${threads} ${output_prefix}.bam"
 samtools index -@ ${threads} ${output_prefix}.bam
 
 # Organize bam
+# Use absolute paths so symlinks stay valid when output_prefix is absolute
+# (e.g. -p /data/result/sample). See: https://github.com/panlab-bioinfo/GPhase/issues/25
 LOG_INFO ${log_file} "run" "Creat directory: bam_files"
-mkdir -p bam_files && cd bam_files
-ln -sf ../${output_prefix}.bam
-ln -sf ../${output_prefix}.bam.bai
-cd ..
+mkdir -p bam_files
+bam_abs=$(realpath "${output_prefix}.bam")
+bai_abs=$(realpath "${output_prefix}.bam.bai")
+ln -sf "${bam_abs}" bam_files/
+ln -sf "${bai_abs}" bam_files/
 
 # gene.list
 LOG_INFO ${log_file} "run" "Creat gene.list"
